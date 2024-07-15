@@ -1,2 +1,2 @@
 # DockerWithGo
-Making linux containers with Golang.
+Making linux containers with Golang
