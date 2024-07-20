@@ -7,7 +7,6 @@ import (
 	"syscall"
 )
 
-
 func main() {
 	switch os.Args[1] {
 	case "run":
@@ -39,6 +38,13 @@ func child() {
 	cmd.Stdout = os.Stdout
 	cmd.Stderr = os.Stderr
 
+	// For this you need to copy the structure like / to home
+	// This is something close to a container image
+
+	syscall.Chroot("/home/rootfs")
+	must(os.Chdir("/"))
+	// To mount proc into our own container
+	must(syscall.Mount("proc", "proc", "proc", 0, ""))
 	must(cmd.Run())
 }
 
